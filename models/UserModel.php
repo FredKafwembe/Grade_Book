@@ -22,7 +22,6 @@ class UserModel {
 
     function updateUser($userId, $password, $role, $email) {
         $sql = "UPDATE user SET password = '$password', role = $role, email = '$email' WHERE user_id = $userId" ;
-//        echo $sql;
         $rowsUpdated = $this->db->exec($sql);
         if(isset($rowsUpdated)) {
             echo "Successfully updated";
