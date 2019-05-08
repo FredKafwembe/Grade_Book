@@ -1,6 +1,8 @@
 <?php
 include_once './models/UserModel.php';
+include_once './models/TeacherModel.php';
 
-$userModel = new UserModel();
-$userRow = $userModel->deleteUser(1);
+$model = new TeacherModel();
+$row = $model->deleteTeacher(2);
+//print_r($row);
 ?>
