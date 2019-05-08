@@ -1,7 +1,7 @@
 <?php
 include_once 'DatabaseConnector.php';
 
-class GradeModel {
+class Grades_TaughtModel {
     private $db;
 
     function __construct() {
@@ -14,16 +14,16 @@ class GradeModel {
     }
 
 
-    function insertGrade($grade_name) {
-        $stm = $this->db->prepare("INSERT INTO grade (grade_name) VALUES (:grade_name)") ;
-        $stm->execute(array( ':grade_name' => $grade_name));
+    function insertGrades_Taught($teacher_id_fk) {
+        $stm = $this->db->prepare("INSERT INTO grades_taught (teacher_id_fk) VALUES (:teacher_id_fk)") ;
+        $stm->execute(array( ':teacher_id_fk' => $teacher_id_fk));
         echo "New record created successfully";
     }
 
-    
+   
 
-    function updateAdmin($grade_id, $grade_name) {
-        $sql = "UPDATE grade SET grade_name = '$grade_name' WHERE grade_id= $grade_id" ;
+     function updateAdmin($grade_id_fk, $teacher_id_fk) {
+        $sql = "UPDATE gradee_taught SET teacher_id_fk = '$teacher_id_fk' WHERE grade_id_fk= $grade_id_fk" ;
 //        echo $sql;
         $rowsUpdated = $this->db->exec($sql);
         if(isset($rowsUpdated)) {
@@ -31,13 +31,13 @@ class GradeModel {
         }
     }
 
-    function selectGrade($grade_id) {
-        $sql = "SELECT * FROM grade WHERE grade_id = $grade_id" ;
+    function selectGrades_Taught($grade_id_fk) {
+        $sql = "SELECT * FROM grades_taught WHERE grade_id_fk = $grade_id_fk" ;
         return $this->db->query($sql);
     }
 
-    function deleteGrade($grade_id) {
-        $sql = "DELETE * FROM grade WHERE `grade_id` = $grade_id" ;
+    function deleteGrades_Taught($grade_id_fk) {
+        $sql = "DELETE FROM grades_taught WHERE `grade_id_fk` = $grade_id_fk" ;
         $affectedrows  = $this->db->exec($sql);
         if(isset($affectedrows)) {
             echo "Record has been successfully deleted";

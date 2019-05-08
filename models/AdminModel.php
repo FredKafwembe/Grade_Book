@@ -20,8 +20,10 @@ class AdminModel {
         echo "New record created successfully";
     }
 
+    
     function updateAdmin($admin_id, $user_id_fk, $first_name, $last_name) {
-        $sql = "UPDATE 'admin' SET 'user_id_fk'= $user_id_fk , 'first_name' = $first_name , 'last_name' = $last_name WHERE 'admin_id' = $admin_id" ;
+        $sql = "UPDATE admin SET user_id_fk = '$user_id_fk', first_name = $first_name, last_name = '$last_name' WHERE admin_id= $admin_id" ;
+//        echo $sql;
         $rowsUpdated = $this->db->exec($sql);
         if(isset($rowsUpdated)) {
             echo "Successfully updated";
