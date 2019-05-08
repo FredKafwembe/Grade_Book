@@ -20,21 +20,21 @@ class AdminModel {
         echo "New record created successfully";
     }
 
-    function updateAdmin($userId, $password, $role, $email) {
-        $sql = "UPDATE 'user' SET 'password'= $password , 'role' = $role , 'email' = $email WHERE 'user_id' = $userId" ;
+    function updateAdmin($admin_id, $user_id_fk, $first_name, $last_name) {
+        $sql = "UPDATE 'admin' SET 'user_id_fk'= $user_id_fk , 'first_name' = $first_name , 'last_name' = $last_name WHERE 'admin_id' = $admin_id" ;
         $rowsUpdated = $this->db->exec($sql);
         if(isset($rowsUpdated)) {
             echo "Successfully updated";
         }
     }
 
-    function selectAdmin($userId) {
-        $sql = "SELECT * FROM user WHERE user_id = $userId" ;
+    function selectAdmin($admin_id) {
+        $sql = "SELECT * FROM admin WHERE admin_id = $admin_id" ;
         return $this->db->query($sql);
     }
 
-    function deleteAdmin($userId) {
-        $sql = "DELETE FROM user WHERE `user_id` = $userId" ;
+    function deleteAdmin($admin_id) {
+        $sql = "DELETE FROM admin WHERE `admin_id` = $admin_id" ;
         $affectedrows  = $this->db->exec($sql);
         if(isset($affectedrows)) {
             echo "Record has been successfully deleted";
