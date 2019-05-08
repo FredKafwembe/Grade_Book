@@ -15,8 +15,8 @@ class AdminModel {
 
 
     function insertAdmin($user_id_fk, $first_name, $last_name) {
-        $stm = $this->db->prepare("INSERT INTO admin (password, email, role) VALUES (:password, :email, :role)") ;
-        $stm->execute(array( ':password' => $password , ':email' => $email , ':role' => $role));
+        $stm = $this->db->prepare("INSERT INTO admin (user_id_fk, first_name, last_name) VALUES (:user_id_fk, :first_name, :last_name)") ;
+        $stm->execute(array( ':user_id_fk' => $user_id_fk , ':first_name' => $first_name , ':last_name' => $last_name));
         echo "New record created successfully";
     }
 
