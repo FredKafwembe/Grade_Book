@@ -21,7 +21,8 @@ class UserModel {
     }
 
     function updateUser($userId, $password, $role, $email) {
-        $sql = "UPDATE 'user' SET 'password'= $password , 'role' = $role , 'email' = $email WHERE 'user_id' = $userId" ;
+        $sql = "UPDATE user SET password = '$password', role = $role, email = '$email' WHERE user_id = $userId" ;
+//        echo $sql;
         $rowsUpdated = $this->db->exec($sql);
         if(isset($rowsUpdated)) {
             echo "Successfully updated";
@@ -30,11 +31,12 @@ class UserModel {
 
     function selectUser($userId) {
         $sql = "SELECT * FROM user WHERE user_id = $userId" ;
-        return $this->db->query($sql);
+        $userEntry = $this->db->query($sql);
+        return $userEntry->fetch();
     }
 
     function deleteUser($userId) {
-        $sql = "DELETE FROM user WHERE `user_id` = $userId" ;
+        $sql = "DELETE FROM user WHERE user_id = $userId";
         $affectedrows  = $this->db->exec($sql);
         if(isset($affectedrows)) {
             echo "Record has been successfully deleted";
