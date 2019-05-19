@@ -17,6 +17,7 @@ require "./libs/Session.php";
 
 require "./config/paths.php";
 require "./config/database.php";
+require "./config/UserPermissions.php";
 
 //require "./models/RolePermissionsModel.php";
 //require "./models/PermissionsModel.php";

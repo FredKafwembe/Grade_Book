@@ -2,7 +2,7 @@
 
 <hr/>
 
-<form method="post" action="<?php echo URL; ?>user/create">
+<form method="post" action="<?php echo URL; ?>roles/create">
   <table>
     <tr>
       <th>Role Name</th> <th>Permissions</th> <th></th>
@@ -14,7 +14,9 @@
       <td>
         <?php
           foreach($this->permissionList as $permission) {
-            printf("<input type='checkbox' name='%s'>%s<br/>", $permission["name"], $permission["name"]);
+            $name = str_replace(" ", "_", $permission["name"]);
+            printf("<input type='checkbox' name='%s' value='%d'>%s<br/>",
+              $name, $permission["permission_id"], $permission["name"]);
           }
         ?>
       </td>

@@ -7,6 +7,18 @@ class RolesModel extends Model {
     parent::__construct();
   }
 
+  function create($data) {
+    $statment = $this->db->prepare("INSERT INTO roles (name) VALUES (:name)");
+    $statment->execute(array(":name" => $data["roleName"]));
+    $roleId = $this->db->lastInsertId();
+
+    $rolePermissionsModel = new RolePermissionsModel();
+    foreach($data["rolePermissions"] as $value) {
+      $rolePermissionsModel->create(array("roleId" => $roleId, "permissionId" => $value));
+    }
+  }
+
+
   function readAllRoles() {
     $statment = $this->db->prepare("SELECT role_id, name FROM roles");
     $statment->execute();
