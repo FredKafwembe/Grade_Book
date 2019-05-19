@@ -1,18 +1,8 @@
 <?php
-include_once 'DatabaseConnector.php';
-
-class MarksModel {
-    private $db;
-
+class ResultsModel extends Model {
     function __construct() {
-        try {
-            $database = new DatabaseConnector();
-            $this->db = $database->openConnection();
-        } catch (PDOException $e) {
-            echo "There is some problem in connection: " . $e->getMessage();
-        }
+      parent::__construct();
     }
-
 
     function insertMarks($pupil_id_fk, $percentage) {
         $stm = $this->db->prepare("INSERT INTO marks (pupil_id_fk, percentage) VALUES (:pupil_id_fk, :percentage)") ;

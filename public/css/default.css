@@ -1,0 +1,18 @@
+body {
+    background: silver;
+}
+
+#header {
+    padding: 20px;
+    background: lightskyblue;
+}
+
+#content {
+    background: white;
+    padding: 20px;
+}
+
+#footer {
+    background: lightskyblue;
+    padding: 20px;
+}

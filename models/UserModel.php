@@ -1,4 +1,6 @@
 <?php
+/**************Grade book code*****************
+
 include_once 'DatabaseConnector.php';
 
 class UserModel {
@@ -40,6 +42,43 @@ class UserModel {
         if(isset($affectedrows)) {
             echo "Record has been successfully deleted";
         }
+    }
+}
+*/
+
+class UserModel extends Model {
+    function __construct() {
+        parent::__construct();
+    }
+
+    function userList() {
+        $statment = $this->db->prepare("SELECT id, login, role FROM users");
+        $statment->execute();
+        return $statment->fetchAll();
+    }
+
+    function listSingleUser($id) {
+      $statment = $this->db->prepare("SELECT id, login, role FROM users WHERE id = :id");
+      $statment->execute(array(":id" => $id));
+      return $statment->fetch();
+    }
+
+    function create($data) {
+      $statment = $this->db->prepare("INSERT INTO users(login, password,
+        role) VALUES (:login, :password, :role)");
+      $statment->execute(array(":login" => $data["login"],
+        ":password" => $data["password"], ":role" => $data["role"]));
+    }
+
+    function editSave($data) {
+      $statment = $this->db->prepare("UPDATE users SET login = :login, password = :password, role = :role WHERE id = :id");
+      $statment->execute(array(":id" => $data["id"], ":login" => $data["login"],
+        ":password" => $data["password"], ":role" => $data["role"]));
+    }
+
+    function delete($id) {
+      $statment = $this->db->prepare("DELETE FROM users WHERE id = :id");
+      $statment->execute(array(":id" => $id));
     }
 }
 ?>
