@@ -12,13 +12,23 @@
         <input type="text" name="roleName"/><br/>
       </td>
       <td>
-        <?php
-          foreach($this->permissionList as $permission) {
-            $name = str_replace("_", " ", $permission["name"]);
-            printf("<input type='checkbox' name='%s' value='%d'>%s<br/>",
-              $permission["name"], $permission["permission_id"], $name);
-          }
-        ?>
+        <table>
+          <tr>
+            <?php
+              foreach($this->permissionList as $key => $permission) {
+                if($key%4 == 0) {
+                  echo "<td>";
+                }
+                $name = str_replace("_", " ", $permission["name"]);
+                printf("<input type='checkbox' name='%s' value='%d'>%s<br/>",
+                  $permission["name"], $permission["permission_id"], $name);
+                if($key%4 == 3) {
+                  echo "</td>";
+                }
+              }
+            ?>
+          </tr>
+        </table>
       </td>
       <td>
         <label>&nbsp;</label><input type='submit' value="Create Role"/>
@@ -34,12 +44,22 @@
   <?php
   foreach ($this->roleList as $key => $value) {
     print("<tr>");
-    printf("<td>%s</td>", $key);
-    print("<td>");
-    foreach($value as $permission) {
-      printf("%s <br/>", $permission);
-    }
-    print("</td>");
+      printf("<td>%s</td>", str_replace("_", " ", $value["roleName"]));
+      print("<td>");
+        print("<table>");
+          print("<tr>");
+          foreach($value["rolePermissions"] as $count => $permission) {
+            if($count%4 == 0) {
+              echo "<td>";
+            }
+            printf("%s <br/>", str_replace("_", " ", $permission));
+            if($count%4 == 3) {
+              echo "</td>";
+            }
+          }
+          print("</tr>");
+        print("</table>");
+      print("</td>");
     print("<tr>");
   }?>  
 </table>

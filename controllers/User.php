@@ -4,9 +4,9 @@ class User extends Controller {
         parent::__construct();
         Session::init();
         $logged = Session::get("loggedIn");
-        $role = Session::get("role");
+        $permissions = Session::get("permissions");
 
-        if(!$logged || $role != "Edit_Role") {
+        if(!$logged || !isset($permissions["View_Users"])) {
             Session::destroy();
             header("location: login");
             exit;
@@ -14,7 +14,7 @@ class User extends Controller {
     }
 
     function index() {
-        $this->view->userList = $this->model->userList();
+        $this->view->userList = $this->model->readAllUsers(true);
         $this->view->render("user/index");
     }
 

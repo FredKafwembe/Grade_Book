@@ -46,15 +46,27 @@ class UserModel {
 }
 */
 
+include_once "RolesModel.php";
+
 class UserModel extends Model {
     function __construct() {
         parent::__construct();
     }
 
-    function userList() {
-        $statment = $this->db->prepare("SELECT id, login, role FROM users");
+    function readAllUsers($includeRoleName = false) {
+        $statment = $this->db->prepare(
+            "SELECT user_id, role_id_fk, password, email,
+            first_name, last_name, contact_number FROM users");
         $statment->execute();
-        return $statment->fetchAll();
+        $userData = $statment->fetchAll();
+        if($includeRoleName) {
+            $roleModel = new RolesModel();
+            foreach($userData as &$user) {
+                $roleData = $roleModel->readRole($user["role_id_fk"]);
+                $user["role_name"] = str_replace("_", " ", $roleData["name"]);
+            }
+        }
+        return $userData;
     }
 
     function listSingleUser($id) {

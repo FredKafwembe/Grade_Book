@@ -30,6 +30,10 @@ class RolesModel extends Model {
     return $statment->fetchAll();
   }
 
+  /**
+   * Returns an associative array in the form
+   * $roleId => array("roleName" => $roleName, "rolePermissions" => array($rolePermissions))
+  */
   function readAllRolesWithPermissions() {
     $rolesWithPermissions = array();
     $roles = $this->readAllRoles();
@@ -45,7 +49,8 @@ class RolesModel extends Model {
         //print_r($permission);
         $rolePermissions[] = $permission["name"];
       }
-      $rolesWithPermissions[$role["name"]] = $rolePermissions;
+      $rolesWithPermissions[$role["role_id"]] = array("roleName" => $role["name"],
+        "rolePermissions" => $rolePermissions);
     }
     return $rolesWithPermissions;
   }

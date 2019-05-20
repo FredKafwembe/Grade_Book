@@ -1,5 +1,6 @@
 <?php
 include_once "RolePermissionsModel.php";
+include_once "PermissionsModel.php";
 
 class LoginModel extends Model {
   function __construct() {
@@ -20,17 +21,23 @@ class LoginModel extends Model {
 
     $rolePermissionsModel = new RolePermissionsModel();
     $rolePermissionsData = $rolePermissionsModel->readAllPermissionIdsWithRole($data["role_id_fk"]);
-    print_r($rolePermissionsDAta);
+    $permissionsModel = new PermissionsModel();
+    $rolePermissions = array();
+    foreach($rolePermissionsData as $value) {
+      $permissionData = $permissionsModel->readPermission($value["permission_id_fk"]);
+      $rolePermissions[$permissionData["name"]] = 1;
+    }
+    //print_r($rolePermissions);
 
     if($count > 0) {
       //Login
       Session::init();
       Session::set("loggedIn", true);
-      Session::set("role", $roleName);
+      Session::set("permissions", $rolePermissions);
       header("location: " . URL . "dashboard");
     } else {
       //Error
-      header("location: ../login");
+      header("location: " . URL . "login");
     }
   }
 }
