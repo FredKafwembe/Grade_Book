@@ -14,9 +14,9 @@
       <td>
         <?php
           foreach($this->permissionList as $permission) {
-            $name = str_replace(" ", "_", $permission["name"]);
+            $name = str_replace("_", " ", $permission["name"]);
             printf("<input type='checkbox' name='%s' value='%d'>%s<br/>",
-              $name, $permission["permission_id"], $permission["name"]);
+              $permission["name"], $permission["permission_id"], $name);
           }
         ?>
       </td>

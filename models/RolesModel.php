@@ -18,6 +18,11 @@ class RolesModel extends Model {
     }
   }
 
+  function readRole($id) {
+    $statment = $this->db->prepare("SELECT name FROM roles WHERE role_id = :id");
+    $statment->execute(array(":id" => $id));
+    return $statment->fetch();
+  }
 
   function readAllRoles() {
     $statment = $this->db->prepare("SELECT role_id, name FROM roles");
