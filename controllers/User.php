@@ -14,15 +14,25 @@ class User extends Controller {
     }
 
     function index() {
+        $this->view->roleList = $this->model->readAllRoles();
         $this->view->userList = $this->model->readAllUsers(true);
         $this->view->render("user/index");
+    }
+    
+    function edit($id) {
+      $this->view->roleList = $this->model->readAllRoles();
+      $this->view->user = $this->model->readUser($id);
+      $this->view->render("user/edit");
     }
 
     function create() {
       $data = array();
-      $data['login'] = $_POST['login'];
+      $data['firstName'] = $_POST['firstName'];
+      $data['lastName'] = $_POST['lastName'];
       $data['password'] = md5($_POST['password']);
-      $data['role'] = $_POST['role'];
+      $data['roleId'] = $_POST['roleId'];
+      $data['email'] = $_POST['email'];
+      $data['contactNumber'] = $_POST['contactNumber'];
 
       //TODO error checking
 
@@ -30,21 +40,19 @@ class User extends Controller {
       header("location: " . URL . "user");
     }
 
-    function edit($id) {
-      $this->view->user = $this->model->listSingleUser($id);
-      $this->view->render("user/edit");
-    }
-
-    function editSave($id) {
+    function updateUser($id) {
       $data = array();
-      $data['id'] = $id;
-      $data['login'] = $_POST['login'];
+      $data['userId'] = $id;
+      $data['firstName'] = $_POST['firstName'];
+      $data['lastName'] = $_POST['lastName'];
       $data['password'] = md5($_POST['password']);
-      $data['role'] = $_POST['role'];
+      $data['roleId'] = $_POST['roleId'];
+      $data['email'] = $_POST['email'];
+      $data['contactNumber'] = $_POST['contactNumber'];
 
       //TODO error checking
 
-      $this->model->editSave($data);
+      $this->model->updateUser($data);
       header("location: " . URL . "user");
     }
 

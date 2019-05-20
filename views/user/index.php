@@ -1,13 +1,17 @@
 <h1>User</h1>
 
 <form method="post" action="<?php echo URL; ?>user/create">
-    <label>Login</label><input type="text" name="login"/><br/>
+    <label>First Name</label><input type="text" name="firstName"/><br/>
+    <label>Last Name</label><input type="text" name="lastName"/><br/>
     <label>Password</label><input type="text" name="password"/><br/>
     <label>Role</label>
-      <select name="role">
-        <option value="default">Default</option>
-        <option value="admin">Admin</option>
+      <select name="roleId">
+        <?php foreach($this->roleList as $role) {
+          printf("<option value='%s'>%s</option>", $role["role_id"], str_replace("_", " ", $role["name"]));
+        } ?>
       </select><br/>
+    <label>Email</label><input type="text" name="email"/><br/>
+    <label>Contact Number</label><input type="text" name="contactNumber"/><br/>
     <label>&nbsp;</label><input type='submit'/>
 </form>
 

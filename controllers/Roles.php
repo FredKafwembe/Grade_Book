@@ -11,6 +11,7 @@ class Roles extends Controller {
   }
 
   function create() {
+    //TODO make sure no duplicate role names
     $data = array();
     $data["roleName"] = $_POST["roleName"];
 
