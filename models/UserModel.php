@@ -107,9 +107,9 @@ class UserModel extends Model {
         //die;
     }
 
-    function delete($id) {
-      $statment = $this->db->prepare("DELETE FROM users WHERE id = :id");
-      $statment->execute(array(":id" => $id));
+    function deleteUser($id) {
+      $statment = $this->db->prepare("DELETE FROM users WHERE user_id = :userId");
+      $statment->execute(array(":userId" => $id));
     }
 }
 ?>

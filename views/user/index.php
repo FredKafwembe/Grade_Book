@@ -35,7 +35,7 @@
       echo "<td>" . $value['email'] . "</td>";
       echo "<td>" . $value['role_name'] . "</td>";
       echo "<td> <a href='" . URL . "user/edit/" . $value['user_id'] . "'>Edit</a>
-            <a href='" . URL . "user/delete/" . $value['user_id'] . "'>Delete</a> </td>";
+            <a href='" . URL . "user/deleteUser/" . $value['user_id'] . "'>Delete</a> </td>";
       echo "</tr>";
   }
 ?>

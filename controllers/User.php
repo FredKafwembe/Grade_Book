@@ -56,8 +56,8 @@ class User extends Controller {
       header("location: " . URL . "user");
     }
 
-    function delete($id) {
-      $this->model->delete($id);
+    function deleteUser($id) {
+      $this->model->deleteUser($id);
       header("location: " . URL . "user");
     }
 }
