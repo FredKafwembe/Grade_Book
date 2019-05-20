@@ -19,16 +19,32 @@
         <a href="<?php echo URL; ?>help">Help</a>
       <?php }?>
       <?php if(Session::get("loggedIn")) { ?>
+        <?php $permissions = Session::get("permissions"); ?>
         <a href="<?php echo URL; ?>dashboard">Dashboard</a>
 
-        <?php //if(Session::get("role") == "owner") { ?>
+        <?php if(isset($permissions["View_Users"])) { ?>
           <a href="<?php echo URL; ?>user">Users</a>
-        <?php //}?>
-        <a href="<?php echo URL; ?>grades">Grades</a>
-        <a href="<?php echo URL; ?>subjects">Subjects</a>
-        <a href="<?php echo URL; ?>results">Results</a>
-        <a href="<?php echo URL; ?>roles">Roles</a>
-        <a href="<?php echo URL; ?>permissions">Permissions</a>
+        <?php } ?>
+
+        <?php if(isset($permissions["View_Grades"])) { ?>
+          <a href="<?php echo URL; ?>grades">Grades</a>
+        <?php } ?>
+
+        <?php if(isset($permissions["View_Subjects"])) { ?>
+          <a href="<?php echo URL; ?>subjects">Subjects</a>
+        <?php } ?>
+
+        <?php if(isset($permissions["View_Results"])) { ?>
+          <a href="<?php echo URL; ?>results">Results</a>
+        <?php } ?>
+
+        <?php if(isset($permissions["View_Roles"])) { ?>
+          <a href="<?php echo URL; ?>roles">Roles</a>
+        <?php } ?>
+
+        <?php if(isset($permissions["View_Permissions"])) { ?>
+          <a href="<?php echo URL; ?>permissions">Permissions</a>
+        <?php } ?>
 
         <a href="<?php echo URL; ?>dashboard/logout">Logout</a>
       <?php } else { ?>

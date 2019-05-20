@@ -1,14 +1,2 @@
-Dashboard only accessed when logged in.
-
-<br/>
-
-<form id="randomInsert" action="<?php echo URL; ?>dashboard/xhrInsert" method="post">
-  <input type="text" name="text"/>
-  <input type="submit"/>
-</form>
-
-<br/>
-
-<div id="listInserts">
-
-</div>
+<h1>Dashboard</h1>
+Only accessed when logged in, shows useful information.

@@ -1,1 +1,3 @@
 <h1>Grades</h1>
+Grades offered by the organization appear here.<br/>
+E.g grade 1 gold, grade 1 silver....

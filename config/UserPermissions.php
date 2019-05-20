@@ -19,7 +19,13 @@ define("USER_PERMISSIONS",
         13 => 'Create_Roles',
         14 => 'View_Roles',
         15 => 'Edit_Roles',
-        16 => 'Delete_Roles'
+        16 => 'Delete_Roles',
+
+        17 => 'Create_Subjects',
+        18 => 'View_Subjects',
+        19 => 'Edit_Subjects',
+        20 => 'Delete_Subjects',
+        21 => 'View_Permissions'
     ));
 ?>
 
