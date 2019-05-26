@@ -5,9 +5,13 @@ class Roles extends Controller {
   }
 
   function index() {
-    $this->view->permissionList = $this->model->readAllPermissions();
     $this->view->roleList = $this->model->readAllRolesWithPermissions();
     $this->view->render("roles/index");
+  }
+
+  function add() {
+    $this->view->permissionList = $this->model->readAllPermissions();
+    $this->view->render("roles/add");
   }
 
   function create() {
