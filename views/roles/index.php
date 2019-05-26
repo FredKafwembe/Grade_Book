@@ -3,7 +3,7 @@
 <hr/>
 
 <form method="post" action="<?php echo URL; ?>roles/create">
-  <table>
+  <table class="table">
     <tr>
       <th>Role Name</th> <th>Permissions</th> <th></th>
     </tr>
@@ -12,7 +12,7 @@
         <input type="text" name="roleName"/><br/>
       </td>
       <td>
-        <table>
+        <table class="table-striped">
           <tr>
             <?php
               foreach($this->permissionList as $key => $permission) {
@@ -39,14 +39,14 @@
 
 <hr/>
 
-<table>
+<table class="table">
   <tr> <th>Role</th> <th>Permissions</th> </tr>
   <?php
   foreach ($this->roleList as $key => $value) {
     print("<tr>");
       printf("<td>%s</td>", str_replace("_", " ", $value["roleName"]));
       print("<td>");
-        print("<table>");
+        print("<table class='table-striped'>");
           print("<tr>");
           foreach($value["rolePermissions"] as $count => $permission) {
             if($count%4 == 0) {
