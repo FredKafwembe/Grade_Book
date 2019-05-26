@@ -2,8 +2,20 @@
   <h1>Roles</h1>
 </div>
 
+<?php if(isset($_GET["success"])) {
+  if($_GET["success"] == 1) { ?>
+    <div class="alert alert-success" role="alert">
+      Successfully removed role <?php echo $_GET["role"]; ?>.
+    </div>
+  <?php } else { ?>
+    <div class="alert alert-danger" role="alert">
+      Failed to remove role <?php echo $_GET["role"]; ?>. Make sure no user is using the role before removing it.
+    </div>
+  <?php }
+} ?>
+
 <table class="table">
-  <tr> <th>Role</th> <th>Permissions</th> </tr>
+  <tr> <th>Role</th> <th>Permissions</th> <th></th></tr>
 
   <?php foreach ($this->roleList as $key => $value) { ?>
     <tr>
@@ -27,6 +39,11 @@
             }
           } ?>
         </table>
+      </td>
+
+      <td>
+        <a href="<?php echo URL; ?>roles/edit/<?php echo $key ?>">Edit</a>
+        <a href="<?php echo URL; ?>roles/delete/<?php echo $key; ?>">Delete</a>
       </td>
     </tr>
   <?php } ?>

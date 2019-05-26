@@ -14,6 +14,16 @@ class Roles extends Controller {
     $this->view->render("roles/add");
   }
 
+  function edit($id) {
+    $this->view->render("roles/edit");
+  }
+
+  function delete($roleId) {
+    $deleteData = $this->model->delete($roleId);
+    $deleteData["role"] = str_replace("_", " ", $deleteData["role"]);
+    header("location: " . URL . "roles?" . http_build_query($deleteData));
+  }
+
   function create() {
     //TODO make sure no duplicate role names
     $data = array();

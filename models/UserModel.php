@@ -53,13 +53,21 @@ class UserModel extends Model {
         parent::__construct();
     }
     
-    function readUser($id) {
+    function readUser($id, $includeRoleName = false) {
         $statment = $this->db->prepare(
             "SELECT user_id, role_id_fk, password, email,
             first_name, last_name, contact_number FROM users
             WHERE user_id = :id");
-      $statment->execute(array(":id" => $id));
-      return $statment->fetch();
+        $statment->execute(array(":id" => $id));
+        $userData = $statment->fetch();
+
+        if($includeRoleName) {
+            $roleModel = new RolesModel();
+            $roleData = $roleModel->readRole($userData["role_id_fk"]);
+            $userData["role_name"] = str_replace("_", " ", $roleData["name"]);
+        }
+
+        return $userData;
     }
 
     function readAllUsers($includeRoleName = false) {
@@ -75,6 +83,15 @@ class UserModel extends Model {
                 $user["role_name"] = str_replace("_", " ", $roleData["name"]);
             }
         }
+        return $userData;
+    }
+
+    function readAllUsersWithRoleId($roleId) {
+        $statment = $this->db->prepare(
+            "SELECT user_id, role_id_fk, password, email,
+            first_name, last_name, contact_number FROM users WHERE role_id_fk=:roleId");
+        $statment->execute(array(":roleId" => $roleId));
+        $userData = $statment->fetchAll();
         return $userData;
     }
 

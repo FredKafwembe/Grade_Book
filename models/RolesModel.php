@@ -1,6 +1,7 @@
 <?php
 require_once "RolePermissionsModel.php";
 require_once "PermissionsModel.php";
+require_once "UserModel.php";
 
 class RolesModel extends Model {
   function __construct() {
@@ -58,6 +59,30 @@ class RolesModel extends Model {
   function readAllPermissions() {
     $permissionsModel = new PermissionsModel();
     return $permissionsModel->readAllPermissions();
+  }
+
+  function delete($roleId) {
+    $success = false;
+
+    $roleData = $this->readRole($roleId);
+
+    $userModel = new UserModel();
+    $users = $userModel->readAllUsersWithRoleId($roleId);
+
+    if(count($users) == 0) {
+      $success = true;
+    }
+
+    if($success) {      
+      $rolePermissionsModel = new RolePermissionsModel();
+      $rolePermissionsModel->deleteAllRolePermissions($roleId);
+
+      $statment = $this->db->prepare("DELETE FROM roles WHERE role_id = :roleId");
+      $statment->execute(array(":roleId" => $roleId));
+    }
+    $data = array("success" => $success ? 1 : 0, "role" => $roleData["name"]);
+
+    return $data;
   }
 }
 ?>
