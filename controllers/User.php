@@ -14,11 +14,15 @@ class User extends Controller {
     }
 
     function index() {
-        $this->view->roleList = $this->model->readAllRoles();
         $this->view->userList = $this->model->readAllUsers(true);
         $this->view->render("user/index");
     }
     
+    function add() {
+      $this->view->roleList = $this->model->readAllRoles();
+      $this->view->render("user/add");
+    }
+
     function edit($id) {
       $this->view->roleList = $this->model->readAllRoles();
       $this->view->user = $this->model->readUser($id);
