@@ -37,8 +37,6 @@
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Add Role</button>
             </div>
-
-            <!--<label>&nbsp;</label><input type='submit' value="Create Role"/>-->
         </form>
     </div>
 

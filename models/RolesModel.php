@@ -19,9 +19,9 @@ class RolesModel extends Model {
     }
   }
 
-  function readRole($id) {
+  function readRole($roleId) {
     $statment = $this->db->prepare("SELECT name FROM roles WHERE role_id = :id");
-    $statment->execute(array(":id" => $id));
+    $statment->execute(array(":id" => $roleId));
     return $statment->fetch();
   }
 
@@ -29,6 +29,27 @@ class RolesModel extends Model {
     $statment = $this->db->prepare("SELECT role_id, name FROM roles");
     $statment->execute();
     return $statment->fetchAll();
+  }
+
+  function readRoleWithPermissions($roleId) {
+    $roleWithPermissions = array();
+    $role = $this->readRole($roleId);
+    $rolePermissionsModel = new RolePermissionsModel();
+    $permissionsModel = new PermissionsModel();
+
+    $rolePermissionIds = $rolePermissionsModel->readAllPermissionIdsWithRole($roleId);
+    //print_r($rolePermissionIds);
+    $rolePermissions = array();
+    foreach ($rolePermissionIds as $permissionId) {
+      //print_r($permissionId["permission_id_fk"]);
+      $permission = $permissionsModel->readPermission($permissionId["permission_id_fk"]);
+      //print_r($permission);
+      $rolePermissions[$permissionId["permission_id_fk"]] = $permission["name"];
+    }
+    $roleWithPermissions[$roleId] = array("roleName" => $role["name"],
+      "rolePermissions" => $rolePermissions);
+
+    return $roleWithPermissions;
   }
 
   /**
@@ -59,6 +80,18 @@ class RolesModel extends Model {
   function readAllPermissions() {
     $permissionsModel = new PermissionsModel();
     return $permissionsModel->readAllPermissions();
+  }
+
+  function updateRole($data) {
+    $statment = $this->db->prepare("UPDATE roles SET name=:name WHERE role_id=:roleId");
+    $statment->execute(array(":roleId" => $data["roleId"], ":name" => $data["roleName"]));
+    //$roleId = $this->db->lastInsertId();
+
+    $rolePermissionsModel = new RolePermissionsModel();
+    $rolePermissionsModel->deleteAllRolePermissions($data["roleId"]);
+    foreach($data["rolePermissions"] as $value) {
+      $rolePermissionsModel->create(array("roleId" => $data["roleId"], "permissionId" => $value));
+    }
   }
 
   function delete($roleId) {

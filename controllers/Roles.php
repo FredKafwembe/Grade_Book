@@ -14,8 +14,27 @@ class Roles extends Controller {
     $this->view->render("roles/add");
   }
 
-  function edit($id) {
+  function edit($roleId) {
+    //$this->view->roleData = $this->model->readRole($roleId);
+    $this->view->roleId = $roleId;
+    $this->view->rolePermissions = $this->model->readRoleWithPermissions($roleId);
+    $this->view->permissionList = $this->model->readAllPermissions();
     $this->view->render("roles/edit");
+  }
+
+  function updateRole($roleId) {
+    $data = array();
+    $data["roleId"] = $roleId;
+    $data["roleName"] = $_POST["roleName"];
+
+    foreach(USER_PERMISSIONS as $permission) {
+      if(isset($_POST[$permission])) {
+        $data["rolePermissions"][$permission] = $_POST[$permission];
+      }
+    }
+
+    $this->model->updateRole($data);
+    header("location: " . URL . "roles");
   }
 
   function delete($roleId) {
