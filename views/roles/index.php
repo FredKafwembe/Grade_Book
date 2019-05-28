@@ -1,65 +1,56 @@
-<h1>Roles</h1>
+<div class="text-center">
+  <h1>Roles</h1>
+</div>
 
-<hr/>
+<?php if(isset($_GET["success"])) {
+  if($_GET["success"] == 1) { ?>
+    <div class="alert alert-success" role="alert">
+      Successfully removed role <?php echo $_GET["role"]; ?>.
+    </div>
+  <?php } else { ?>
+    <div class="alert alert-danger" role="alert">
+      Failed to remove role <?php echo $_GET["role"]; ?>. Make sure no user is using the role before removing it.
+    </div>
+  <?php }
+} ?>
 
-<form method="post" action="<?php echo URL; ?>roles/create">
-  <table>
-    <tr>
-      <th>Role Name</th> <th>Permissions</th> <th></th>
-    </tr>
+<table class="table">
+  <tr> <th>Role</th> <th>Permissions</th> <th></th></tr>
+
+  <?php foreach ($this->roleList as $key => $value) { ?>
     <tr>
       <td>
-        <input type="text" name="roleName"/><br/>
+        <?php echo str_replace("_", " ", $value["roleName"]); ?>
       </td>
+
       <td>
-        <table>
-          <tr>
-            <?php
-              foreach($this->permissionList as $key => $permission) {
-                if($key%4 == 0) {
-                  echo "<td>";
-                }
-                $name = str_replace("_", " ", $permission["name"]);
-                printf("<input type='checkbox' name='%s' value='%d'>%s<br/>",
-                  $permission["name"], $permission["permission_id"], $name);
-                if($key%4 == 3) {
-                  echo "</td>";
-                }
-              }
-            ?>
-          </tr>
+        <table class='table-sm table-borderless'>
+          <?php foreach($value["rolePermissions"] as $count => $permission) {
+            if($count%6 == 0) {
+              echo "<tr>";
+            } ?>
+
+            <td>
+              <?php echo str_replace("_", " ", $permission); ?>
+            </td>
+
+            <?php if($count%6 == 5) {
+              echo "</tr>";
+            }
+          } ?>
         </table>
       </td>
+
       <td>
-        <label>&nbsp;</label><input type='submit' value="Create Role"/>
+        <a href="<?php echo URL; ?>roles/edit/<?php echo $key ?>">Edit</a>
+        <a href="<?php echo URL; ?>roles/delete/<?php echo $key; ?>">Delete</a>
       </td>
     </tr>
-  </table>
-</form>
-
-<hr/>
-
-<table>
-  <tr> <th>Role</th> <th>Permissions</th> </tr>
-  <?php
-  foreach ($this->roleList as $key => $value) {
-    print("<tr>");
-      printf("<td>%s</td>", str_replace("_", " ", $value["roleName"]));
-      print("<td>");
-        print("<table>");
-          print("<tr>");
-          foreach($value["rolePermissions"] as $count => $permission) {
-            if($count%4 == 0) {
-              echo "<td>";
-            }
-            printf("%s <br/>", str_replace("_", " ", $permission));
-            if($count%4 == 3) {
-              echo "</td>";
-            }
-          }
-          print("</tr>");
-        print("</table>");
-      print("</td>");
-    print("<tr>");
-  }?>  
+  <?php } ?>
 </table>
+
+<div class="text-center">
+  <form method="post" class="form" action="<?php echo URL; ?>roles/add">
+    <button type="submit" class="btn btn-primary">Add Role</button>
+  </form>
+</div>
