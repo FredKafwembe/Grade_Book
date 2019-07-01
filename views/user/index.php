@@ -11,21 +11,21 @@
     <th></th>
   </tr>
   <?php
+  Session::init();
   foreach($this->userList as $key => $value) {
       echo "<tr>";
       echo "<td>" . $value['user_id'] . "</td>";
       echo "<td>" . $value['first_name'] . "</td>";
       echo "<td>" . $value['last_name'] . "</td>";
-      echo "<td>" . $value['contact_number'] . "</td>";
+      echo "<td> +26" . $value['contact_number'] . "</td>";
       echo "<td>" . $value['email'] . "</td>";
       echo "<td>" . $value['role_name'] . "</td>";
       echo "<td>";
       
-      Session::init();
       $permissions = Session::get("permissions");
 
       if(isset($permissions["Edit_Users"])) {
-        echo "<a href='" . URL . "user/edit/" . $value['user_id'] . "'>Edit</a>";
+        echo "<a href='" . URL . "user/edit/" . $value['user_id'] . "'>Edit</a> ";
       }
 
       if(isset($permissions["Delete_Users"])) {
@@ -35,7 +35,7 @@
       echo "</td>";
       echo "</tr>";
   }
-?>
+  ?>
 </table>
 
 <?php if(isset($permissions["Create_Users"])) { ?>

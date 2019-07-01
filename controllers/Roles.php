@@ -5,7 +5,8 @@ class Roles extends Controller {
 
     Session::init();
     $logged = Session::get("loggedIn");
-    if(!$logged) {
+    $permissions = Session::get("permissions");
+    if(!$logged || !$permissions["View_Roles"]) {
       Session::destroy();
       header("location: login");
       exit;
