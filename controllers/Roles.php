@@ -2,6 +2,14 @@
 class Roles extends Controller {
   function __construct() {
     parent::__construct();
+
+    Session::init();
+    $logged = Session::get("loggedIn");
+    if(!$logged) {
+      Session::destroy();
+      header("location: login");
+      exit;
+    }
   }
 
   function index() {
@@ -10,12 +18,21 @@ class Roles extends Controller {
   }
 
   function add() {
+    $this->view->js = array("../public/js/formValidation.js");
+
     $this->view->permissionList = $this->model->readAllPermissions();
     $this->view->render("roles/add");
   }
 
+  function validation() {
+    $this->view->js = array("../public/js/formValidation.js");
+
+    $this->view->render("roles/validation");
+  }
+
   function edit($roleId) {
-    //$this->view->roleData = $this->model->readRole($roleId);
+    $this->view->js = array("../public/js/formValidation.js");
+
     $this->view->roleId = $roleId;
     $this->view->rolePermissions = $this->model->readRoleWithPermissions($roleId);
     $this->view->permissionList = $this->model->readAllPermissions();

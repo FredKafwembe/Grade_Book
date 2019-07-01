@@ -19,6 +19,8 @@ class User extends Controller {
     }
     
     function add() {
+      $this->view->js = array("../public/js/formValidation.js");
+
       $this->view->roleList = $this->model->readAllRoles();
       $this->view->render("user/add");
     }

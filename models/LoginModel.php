@@ -8,11 +8,11 @@ class LoginModel extends Model {
     //echo "Login in model.";
   }
 
-  public function run() {
+  public function run($loginInfo) {
     $statement = $this->db->prepare(
       "SELECT role_id_fk, password, email, first_name, last_name, contact_number 
       FROM users WHERE user_id = :userId AND password = MD5(:password)");
-    $statement->execute(array(":userId" => $_POST['userId'], ":password" => $_POST['password']));
+    $statement->execute(array(":userId" => $loginInfo['userId'], ":password" => $loginInfo['password']));
 
     $data = $statement->fetch();
     //print_r($data);

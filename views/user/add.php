@@ -1,22 +1,26 @@
+<div class="text-center">
+  <h1>Add: User</h1>
+</div>
+
 <div class="row">
   
   <div class="col-sm-2">
   </div>
   
   <div class="col-sm-8">
-    <form method="post" class="form" action="<?php echo URL; ?>user/create">
+    <form method="post" class="form" action="<?php echo URL; ?>user/create" novalidate>
 
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName"/>
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required/>
           </div>
         </div>
         <div class="col">
           <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" name="lastName"/>
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required/>
           </div>
         </div>
       </div>
@@ -24,14 +28,14 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Password</label>
-            <input type="text" class="form-control" name="password"/>
+            <label for="password">Password</label>
+            <input type="text" class="form-control" id="password" name="password" required/>
           </div>
         </div>
         <div class="col">
           <div class="form-group">
-            <label>Role</label>
-            <select name="roleId" class="form-control">
+            <label for="role">Role</label>
+            <select name="roleId" class="form-control" id="role" required>
               <?php foreach($this->roleList as $role) {
                 printf("<option value='%s'>%s</option>", $role["role_id"], str_replace("_", " ", $role["name"]));
               } ?>
@@ -43,14 +47,19 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email"/>
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required/>
           </div>
         </div>
         <div class="col">
           <div class="form-group">
-            <label>Contact Number</label>
-            <input type="text" class="form-control" name="contactNumber"/>
+            <label for="contactNumber">Contact Number</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">+26</span>
+              </div>
+              <input type="number" class="form-control" id="contactNumber" name="contactNumber" required/>
+            </div>
           </div>
         </div>
       </div>

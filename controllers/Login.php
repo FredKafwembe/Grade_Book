@@ -13,7 +13,11 @@ class Login extends Controller {
   }
 
   function run() {
-    $this->model->run();
+    $loginInfo = array();
+    $loginInfo["userId"] = $_POST['userId'];
+    $loginInfo["password"] = $_POST['password'];
+
+    $this->model->run($loginInfo);
   }
 }
 ?>
