@@ -1,6 +1,7 @@
 <?php
 class View {
 	function __construct() {
+		Session::init();
 	}
 
 	public function render($name, $noInclude = false) {

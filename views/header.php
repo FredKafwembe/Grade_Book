@@ -82,6 +82,13 @@
             </li>
           <?php }?>
         </ul>
+
+        <?php if(Session::get("loggedIn")) { ?>
+          <ul class="nav navbar-nav navbar-right">
+            <li>Welcome <?php echo Session::get("firstName") . " " . 
+              Session::get("lastName") . "<br/> User ID: " . Session::get("userId"); ?></li>
+          </ul>
+        <?php } ?>
       </div>
     </nav>
 

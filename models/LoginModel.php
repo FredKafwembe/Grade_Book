@@ -34,6 +34,9 @@ class LoginModel extends Model {
       Session::init();
       Session::set("loggedIn", true);
       Session::set("permissions", $rolePermissions);
+      Session::set("firstName", $data["first_name"]);
+      Session::set("lastName", $data["last_name"]);
+      Session::set("userId", $loginInfo["userId"]);
       header("location: " . URL . "dashboard");
     } else {
       //Error
