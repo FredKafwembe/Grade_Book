@@ -54,6 +54,14 @@ class ResultsModel extends Model {
         return $data;
     }
 
+    function readAllGradeInfo() {
+        $stm = $this->db->prepare("SELECT grade_id, grade_name FROM grades");
+        $stm->execute();
+        $data = $stm->fetchAll();
+
+        return $data;
+    }
+
     function readPupilsInGrades($gradesData) {
         $pupilsData = array();
         $stm = $this->db->prepare("SELECT user_id, first_name, last_name FROM users WHERE 

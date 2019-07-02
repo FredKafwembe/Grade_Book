@@ -58,7 +58,7 @@
                                                                             <div class="col text-right">
                                                                                 <input readonly id="<?php echo TEST_TYPE["mid"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
                                                                                     class="form-control-plaintext text-right" 
-                                                                                    style="display: inline; width: 4em"
+                                                                                    style="display: inline; width: 5em"
                                                                                     type="number" 
                                                                                     value= <?php 
                                                                                     $resultFound = false;
@@ -73,7 +73,6 @@
                                                                                         echo 0;
                                                                                     ?>
                                                                                     name="<?php echo $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
-                                                                                    step="0.01"
                                                                                     min="0" 
                                                                                     max="100">
                                                                                 <button onClick="editMark(<?php echo "'" . TEST_TYPE["mid"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'"; ?>)" class="btn btn-primary btn-sm" type="button">Edit</button>
@@ -120,7 +119,7 @@
                                                                             <div class="col text-right">
                                                                                 <input readonly id="<?php echo TEST_TYPE["end"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
                                                                                     class="form-control-plaintext text-right" 
-                                                                                    style="display: inline; width: 4em" 
+                                                                                    style="display: inline; width: 5em" 
                                                                                     type="number" 
                                                                                     value= <?php 
                                                                                     $resultFound = false;

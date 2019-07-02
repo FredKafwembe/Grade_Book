@@ -31,6 +31,14 @@ class Results extends Controller {
       $this->view->pupilResults = $pupilResultsData;
       $this->view->render("results/pupil");
     } else {
+      $gradesInfo = $this->model->readAllGradeInfo();
+      $pupilInfo = $this->model->readPupilsInGrades($gradesInfo);
+      $this->view->gradesInfo = $gradesInfo;
+      $this->view->pupilInfo = $pupilInfo;
+      $pupilsResults = $this->model->readPupilsResults($pupilInfo);
+      $this->calculatePassGrades($pupilsResults);
+      $this->view->pupilsResults = $pupilsResults;
+      $this->view->gradesSubjects = $this->model->readSubjectsInGrades($gradesInfo);
       $this->view->render("results/index");
     }
   }
