@@ -2,6 +2,14 @@
 class Results extends Controller {
   function __construct() {
     parent::__construct();
+
+    $logged = Session::get("loggedIn");
+    $permissions = Session::get("permissions");
+    if(!$logged || !$permissions["View_Results"]) {
+      Session::destroy();
+      header("location: login");
+      exit;
+    }
   }
 
   function index() {
