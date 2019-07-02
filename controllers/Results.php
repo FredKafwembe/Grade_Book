@@ -13,14 +13,47 @@ class Results extends Controller {
     $this->view->isTeacher = $this->model->isTeacher($userId);
 
     if($this->view->isTeacher) {
-       $gradesInfo = $this->model->readGradesTaughtByTeacher($userId);
-       $pupilInfo = $this->model->readPupilsInGrades($gradesInfo);
-       $this->view->gradesInfo = $gradesInfo;
-       $this->view->pupilInfo = $pupilInfo;
-       $this->view->pupilsResults = $this->model->readPupilsResults($pupilInfo);
-       $this->view->gradesSubjects = $this->model->readSubjectsInGrades($gradesInfo);
+      $gradesInfo = $this->model->readGradesTaughtByTeacher($userId);
+      $pupilInfo = $this->model->readPupilsInGrades($gradesInfo);
+      $this->view->gradesInfo = $gradesInfo;
+      $this->view->pupilInfo = $pupilInfo;
+      $pupilsResults = $this->model->readPupilsResults($pupilInfo);
+      $this->calculatePassGrades($pupilsResults);
+      $this->view->pupilsResults = $pupilsResults;
+      $this->view->gradesSubjects = $this->model->readSubjectsInGrades($gradesInfo);
+      $this->view->render("results/teacher");
+    } else if($this->view->isPupil) {
+      $this->view->firstName = Session::get("firstName");
+      $this->view->lastName = Session::get("lastName");
+      $this->view->gradeData = $this->model->readPupilGrade(Session::get("userId"));
+      $pupilResultsData = $this->model->readPupilResults(Session::get("userId"));
+      $this->calculatePassGrades($pupilResultsData);
+      $this->view->pupilResults = $pupilResultsData;
+      $this->view->render("results/pupil");
+    } else {
+      $this->view->render("results/index");
     }
-    $this->view->render("results/index");
+  }
+
+  function calculatePassGrades(&$pupilResultsData) {
+    foreach($pupilResultsData as &$pupilResults) {
+      foreach($pupilResults as &$subjectResults) {
+        $percent = $subjectResults["percentage"];
+        if($percent < PASS_GRADES["E"]) {
+          $subjectResults["passGrade"] = "F";
+        } else if($percent < PASS_GRADES["D"]) {
+          $subjectResults["passGrade"] = "E";
+        } else if($percent < PASS_GRADES["C"]) {
+          $subjectResults["passGrade"] = "D";
+        } else if($percent < PASS_GRADES["B"]) {
+          $subjectResults["passGrade"] = "C";
+        } else if($percent < PASS_GRADES["A"]) {
+          $subjectResults["passGrade"] = "B";
+        } else {
+          $subjectResults["passGrade"] = "A";
+        }
+      }
+    }
   }
 
   function updateResults($userId) {

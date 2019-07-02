@@ -18,6 +18,8 @@ require "./libs/Session.php";
 require "./config/paths.php";
 require "./config/database.php";
 require "./config/UserPermissions.php";
+require "./config/TestTypes.php";
+require "./config/PassGrades.php";
 
 //require "./models/RolePermissionsModel.php";
 //require "./models/PermissionsModel.php";

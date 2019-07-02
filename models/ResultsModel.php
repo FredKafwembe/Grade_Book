@@ -97,10 +97,24 @@ class ResultsModel extends Model {
         return $data;
     }
 
+    function readPupilResults($userId) {
+        $pupilInfo = array(array(array("user_id" => $userId)));
+        $pupilResults = $this->readPupilsResults($pupilInfo);
+        return $pupilResults;
+    }
+
+    
     function readPupilsResults($pupilsInfo) {
+        //print_r($pupilsInfo);
         $pupilsResults = array();
-        $stm = $this->db->prepare("SELECT subject_id_fk, percentage, test_time FROM marks WHERE 
-            user_id_fk = :userId");
+
+        "SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+        FROM Orders
+        INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID";
+
+        $stm = $this->db->prepare("SELECT marks.subject_id_fk, subjects.name, marks.percentage, 
+        marks.test_time FROM marks INNER JOIN subjects ON marks.subject_id_fk = subjects.subject_id
+        AND user_id_fk = :userId");
         foreach($pupilsInfo as $gradeInfo) {
             foreach($gradeInfo as $pupilInfo) {
                 $stm->execute(array(":userId" => $pupilInfo["user_id"]));
@@ -108,8 +122,18 @@ class ResultsModel extends Model {
                 $pupilsResults[$pupilInfo["user_id"]] = $data;
             }
         }
-
+        
         return $pupilsResults;
+    }
+    
+    function readPupilGrade($userId) {
+        $stm = $this->db->prepare("SELECT grade_id, grade_name FROM grades WHERE 
+            grade_id = (SELECT grade_id_fk FROM pupils WHERE user_id_fk = :userId)");
+        $stm->execute(array(":userId" => $userId));
+        $data = $stm->fetch();
+        //print_r($data);
+        //die;
+        return $data;
     }
 
     function updateResults($resultsData) {
