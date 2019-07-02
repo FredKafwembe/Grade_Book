@@ -20,17 +20,7 @@ class Results extends Controller {
     $this->view->isPupil = $this->model->isPupil($userId);
     $this->view->isTeacher = $this->model->isTeacher($userId);
 
-    if($this->view->isTeacher) {
-      $gradesInfo = $this->model->readGradesTaughtByTeacher($userId);
-      $pupilInfo = $this->model->readPupilsInGrades($gradesInfo);
-      $this->view->gradesInfo = $gradesInfo;
-      $this->view->pupilInfo = $pupilInfo;
-      $pupilsResults = $this->model->readPupilsResults($pupilInfo);
-      $this->calculatePassGrades($pupilsResults);
-      $this->view->pupilsResults = $pupilsResults;
-      $this->view->gradesSubjects = $this->model->readSubjectsInGrades($gradesInfo);
-      $this->view->render("results/teacher");
-    } else if($this->view->isPupil) {
+    if($this->view->isPupil) {
       $this->view->firstName = Session::get("firstName");
       $this->view->lastName = Session::get("lastName");
       $this->view->gradeData = $this->model->readPupilGrade(Session::get("userId"));
@@ -39,7 +29,12 @@ class Results extends Controller {
       $this->view->pupilResults = $pupilResultsData;
       $this->view->render("results/pupil");
     } else {
-      $gradesInfo = $this->model->readAllGradeInfo();
+      $gradesInfo = array();
+      if($this->view->isTeacher) {
+        $gradesInfo = $this->model->readGradesTaughtByTeacher($userId);
+      } else {
+        $gradesInfo = $this->model->readAllGradeInfo();
+      }
       $pupilInfo = $this->model->readPupilsInGrades($gradesInfo);
       $this->view->gradesInfo = $gradesInfo;
       $this->view->pupilInfo = $pupilInfo;

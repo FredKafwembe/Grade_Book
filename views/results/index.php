@@ -75,16 +75,25 @@
                                                                                     name="<?php echo $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
                                                                                     min="0" 
                                                                                     max="100">
-                                                                                <button onClick="editMark(<?php echo "'" . TEST_TYPE["mid"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'"; ?>)" class="btn btn-primary btn-sm" type="button">Edit</button>
+                                                                                
+                                                                                <?Php $permissions = Session::get("permissions");
+                                                                                if(isset($permissions["Edit_Results"])) { ?>
+                                                                                    <button onClick="editMark(<?php echo "'" . TEST_TYPE["mid"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'"; ?>)" 
+                                                                                        class="btn btn-primary btn-sm" type="button">Edit</button>
+                                                                                <?php } ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             <?php } ?>
                                                             <input type="hidden" name="testType" value="<?php echo TEST_TYPE["mid"] ?>">
-                                                            <div class="text-center">
-                                                                <button type="submit" class="btn btn-primary form-control">Update</button>
-                                                            </div>
+
+                                                            <?Php $permissions = Session::get("permissions");
+                                                            if(isset($permissions["Edit_Results"])) { ?>
+                                                                <div class="text-center">
+                                                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                                                </div>
+                                                            <?php } ?>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -136,16 +145,24 @@
                                                                                     name="<?php echo $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
                                                                                     min="0" 
                                                                                     max="100">
-                                                                                <button onClick="editMark(<?php echo "'" . TEST_TYPE["end"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'" ?>)" class="btn btn-primary btn-sm" type="button">Edit</button>
+
+                                                                                <?Php $permissions = Session::get("permissions");
+                                                                                if(isset($permissions["Edit_Results"])) { ?>
+                                                                                    <button onClick="editMark(<?php echo "'" . TEST_TYPE["end"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'" ?>)" class="btn btn-primary btn-sm" type="button">Edit</button>
+                                                                                <?php } ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             <?php } ?>
                                                             <input type="hidden" name="testType" value="<?php echo TEST_TYPE["end"] ?>">
-                                                            <div class="text-center">
-                                                                <button type="submit" class="btn btn-primary form-control">Update</button>
-                                                            </div>
+                                                            
+                                                            <?Php $permissions = Session::get("permissions");
+                                                            if(isset($permissions["Edit_Results"])) { ?>
+                                                                <div class="text-center">
+                                                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                                                </div>
+                                                            <?php } ?>
                                                         </form>
                                                     </div>
                                                 </div>

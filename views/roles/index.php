@@ -43,7 +43,6 @@
 
       <td>
         <?php
-          Session::init();
           $permissions = Session::get("permissions");
           if(isset($permissions["Edit_Roles"])) {
             echo "<a href=" . URL . "roles/edit/$key>Edit</a> ";
