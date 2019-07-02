@@ -47,9 +47,13 @@ class ResultsModel extends Model {
         $stm->execute(array(":userId" => $userId));
         $data = $stm->fetchAll();
 
-        //echo "user id: $userId <br/>";
-        //print_r($data);
-        //die;
+        return $data;
+    }
+
+    function readGradeInfo($gradeId) {
+        $stm = $this->db->prepare("SELECT grade_id, grade_name FROM grades WHERE grade_id = :gradeId");
+        $stm->execute(array(":gradeId" => $gradeId));
+        $data = $stm->fetchAll();
 
         return $data;
     }

@@ -35,6 +35,7 @@ class Results extends Controller {
       } else {
         $gradesInfo = $this->model->readAllGradeInfo();
       }
+      //print_r($gradesInfo);
       $pupilInfo = $this->model->readPupilsInGrades($gradesInfo);
       $this->view->gradesInfo = $gradesInfo;
       $this->view->pupilInfo = $pupilInfo;
@@ -82,6 +83,81 @@ class Results extends Controller {
 
     $this->model->updateResults($resultsData);
     header("location: " . URL . "results");
+  }
+
+  function createPDF($gradeId) {
+    $tableColumnWidth = 50;
+
+    $gradesInfo = $this->model->readGradeInfo($gradeId);
+    $pupilsInfo = $this->model->readPupilsInGrades($gradesInfo);
+    $pupilsResults = $this->model->readPupilsResults($pupilsInfo);
+    $this->calculatePassGrades($pupilsResults);
+
+    $pdf = new FPDF();
+    foreach($pupilsInfo[$gradesInfo[0]["grade_id"]] as $pupilInfo) {
+      $pdf->AddPage();
+      $pdf->SetFont('Arial','B',24);
+      $pdf->Cell(80);
+      $pdf->Cell(30, 10, 'Results', 0, 0, 'C');
+      $pdf->Ln(20);
+      
+      $pdf->SetFont('Arial', '', 16);
+
+      $pdf->Cell(0, 10, "Grade: " . $gradesInfo[0]["grade_name"], 0, 1, 'L');
+      $pdf->Cell(0, 10, "Name: " . $pupilInfo["first_name"] . " " . $pupilInfo["last_name"], 0, 1, 'L');
+
+      $pdf->Ln();
+
+
+      /*Start creating mid term table*/
+      $pdf->Cell($tableColumnWidth, 7, "", 'TL');
+      $pdf->Cell($tableColumnWidth, 7, "Mid Term", 'TB', 0, 'C');
+      $pdf->Cell($tableColumnWidth, 7, "", 'TR');
+      $pdf->Ln();
+
+      $header = array("Subject Name", "Percentage", "Grade");
+      foreach($header as $columnHeader) {
+        $pdf->Cell($tableColumnWidth, 7, $columnHeader, 1, 'C');
+      }
+      $pdf->Ln();
+      foreach($pupilsResults[$pupilInfo["user_id"]] as $subjectResult) {
+        if($subjectResult["test_time"] != TEST_TYPE["mid"]) {
+          continue;
+        }
+
+        $pdf->Cell($tableColumnWidth, 6, $subjectResult["name"], 1);
+        $pdf->Cell($tableColumnWidth, 6, $subjectResult["percentage"], 1);
+        $pdf->Cell($tableColumnWidth, 6, $subjectResult["passGrade"], 1);
+        $pdf->Ln();
+      }
+
+      /*Start creating end of term table*/
+      $pdf->Ln();
+
+      $pdf->Cell($tableColumnWidth, 7, "", 'TL');
+      $pdf->Cell($tableColumnWidth, 7, "End of Term", 'TB', 0, 'C');
+      $pdf->Cell($tableColumnWidth, 7, "", 'TR');
+      $pdf->Ln();
+
+      $header = array("Subject Name", "Percentage", "Grade");
+      foreach($header as $columnHeader) {
+        $pdf->Cell($tableColumnWidth, 7, $columnHeader, 1, 'C');
+      }
+      $pdf->Ln();
+      foreach($pupilsResults[$pupilInfo["user_id"]] as $subjectResult) {
+        if($subjectResult["test_time"] != TEST_TYPE["end"]) {
+          continue;
+        }
+
+        $pdf->Cell($tableColumnWidth, 6, $subjectResult["name"], 1);
+        $pdf->Cell($tableColumnWidth, 6, $subjectResult["percentage"], 1);
+        $pdf->Cell($tableColumnWidth, 6, $subjectResult["passGrade"], 1);
+        $pdf->Ln();
+      }
+    }
+
+    //$pdf->Cell(60,10,'Powered by FPDF.',0,1,'C');
+    $pdf->Output();
   }
 }
 ?>

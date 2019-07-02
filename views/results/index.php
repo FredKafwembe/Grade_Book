@@ -175,6 +175,13 @@
                         }
                     }
                     ?>
+                    <tr>
+                        <td class="text-center" colspan="4">
+                            <form method="post" action="<?php echo URL . "results/createPDF/" . $this->gradesInfo[$i]["grade_id"]; ?>">
+                                <button type="submit" class="btn btn-primary">Create PDF</button>
+                            </form>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>

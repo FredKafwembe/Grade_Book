@@ -7,7 +7,6 @@
 //$row = $model->insertSubject("kldafsdfafd");
 //print_r($row);
 
-//Use and autoloader
 require "./libs/Bootstrap.php";
 require "./libs/Controller.php";
 require "./libs/Model.php";
@@ -20,6 +19,8 @@ require "./config/database.php";
 require "./config/UserPermissions.php";
 require "./config/TestTypes.php";
 require "./config/PassGrades.php";
+
+require "./public/php/fpdf.php";
 
 //require "./models/RolePermissionsModel.php";
 //require "./models/PermissionsModel.php";
