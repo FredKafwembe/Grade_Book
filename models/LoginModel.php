@@ -37,6 +37,7 @@ class LoginModel extends Model {
       Session::set("firstName", $data["first_name"]);
       Session::set("lastName", $data["last_name"]);
       Session::set("userId", $loginInfo["userId"]);
+      Session::set("Email", $data["email"]);
       header("location: " . URL . "dashboard");
     } else {
       //Error

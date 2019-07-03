@@ -159,5 +159,51 @@ class Results extends Controller {
     //$pdf->Cell(60,10,'Powered by FPDF.',0,1,'C');
     $pdf->Output();
   }
+
+  function exportToExcel($gradeId) {
+    $gradesInfo = $this->model->readGradeInfo($gradeId);
+    $pupilsInfo = $this->model->readPupilsInGrades($gradesInfo);
+    $pupilsResults = $this->model->readPupilsResults($pupilsInfo);
+    $this->calculatePassGrades($pupilsResults);
+
+    $data = array();
+    foreach($pupilsInfo[$gradesInfo[0]["grade_id"]] as $pupilInfo) {
+      foreach($pupilsResults[$pupilInfo["user_id"]] as $pupilResults) {
+        $pupilData["First Name"] = $pupilInfo["first_name"];
+        $pupilData["Last Name"] = $pupilInfo["last_name"];
+        $pupilData["Subject Name"] = $pupilResults["name"];
+        $pupilData["Test Type"] = $pupilResults["test_time"];
+        $pupilData["Percentage"] = $pupilResults["percentage"];
+        $pupilData["Pass Grade"] = $pupilResults["passGrade"];
+        $data[] = $pupilData;
+      }
+    }
+    
+    // file name for download
+    $fileName = "grade_book-" . $gradesInfo[0]["grade_name"] . date('Ymd') . ".xls";
+    
+    // headers for download
+    header("Content-Disposition: attachment; filename=\"$fileName\"");
+    header("Content-Type: application/vnd.ms-excel");
+    
+    $flag = false;
+    foreach($data as $row) {
+        if(!$flag) {
+            // display column names as first row
+            echo implode("\t", array_keys($row)) . "\n";
+            $flag = true;
+        }
+        // filter data
+        array_walk($row, array($this, 'filterData'));
+        echo implode("\t", array_values($row)) . "\n";
+
+    }
+  }
+
+  function filterData(&$str) {
+      $str = preg_replace("/\t/", "\\t", $str);
+      $str = preg_replace("/\r?\n/", "\\n", $str);
+      if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+  }
 }
 ?>

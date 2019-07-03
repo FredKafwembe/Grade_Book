@@ -177,9 +177,20 @@
                     ?>
                     <tr>
                         <td class="text-center" colspan="4">
-                            <form method="post" action="<?php echo URL . "results/createPDF/" . $this->gradesInfo[$i]["grade_id"]; ?>">
-                                <button type="submit" class="btn btn-primary">Create PDF</button>
-                            </form>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <form style="display: inline" method="post" action="<?php echo URL . "results/createPDF/" . $this->gradesInfo[$i]["grade_id"]; ?>">
+                                            <button type="submit" class="btn btn-primary">Create PDF</button>
+                                        </form>
+                                    </div>
+                                    <div class="col">
+                                        <form style="display: inline" method="post" action="<?php echo URL . "results/exportToExcel/" . $this->gradesInfo[$i]["grade_id"]; ?>">
+                                            <button type="submit" class="btn btn-primary">Create Excel Document</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </table>

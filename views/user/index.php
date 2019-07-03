@@ -43,8 +43,8 @@
     <form method="post" class="form" action="<?php echo URL; ?>user/add">
       <button type="submit" class="btn btn-primary">Add User</button>
     </form>
-
-    <form method="post" class="form" action="<?php echo URL; ?>user/broadcastEmail">
+    <br/>
+    <form method="post" class="form" action="<?php echo URL; ?>user/sendEmail">
       <button type="submit" class="btn btn-primary">Send Email</button>
     </form>
   </div>

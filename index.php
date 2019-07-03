@@ -22,6 +22,13 @@ require "./config/PassGrades.php";
 
 require "./public/php/fpdf.php";
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require './public/php/Exception.php';
+require './public/php/PHPMailer.php';
+require './public/php/SMTP.php';
+
 //require "./models/RolePermissionsModel.php";
 //require "./models/PermissionsModel.php";
 
