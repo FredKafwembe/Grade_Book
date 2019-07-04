@@ -10,7 +10,7 @@
   </select>
   <input type="hidden" id="custId" name="grade_id" value="<?php echo $this->grade_id ?>">
   <div class="col text-center">
-    <button type="submit" class="btn btn-primary">Search</button> 
+    <button type="submit" class="btn btn-primary">Filter</button> 
     <!--<input type="submit" class="btn btn-default" />-->
   </div>
 </form>
