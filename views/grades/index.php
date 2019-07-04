@@ -1,21 +1,22 @@
 <h1>Grades</h1>
-<form method="post" action="<?php echo URL; ?>grades/create">
-    
-    <br/>
-    
-        <label>Add Grade</label><input type="text" name="grade_name"/>
-    <label>&nbsp;</label><input type='submit'/>
-</form>
+
 
 <table>
-  <tr>Grade</tr>
+  <tr>
+
+  <th>GRADE</th>
+ 
+  
+  <tr/>
+
 <?php
 
   foreach($this->gradeList as $key => $value) {
       echo "<tr>";
       
       echo "<td>" . $value['grade_name'] . "</td>";
-      echo "<td> <a href='" . URL . "grades/edit/" . $value['grade_id'] . "'>Edit</a>
+     
+      echo "<td> <a href='" . URL . "grades/edit/" . $value['grade_id'] . "'>View</a>
             <a href='" . URL . "grades/deleteUser/" . $value['grade_id'] . "'>Delete</a> </td>";
       echo "</tr>";
 
@@ -23,11 +24,14 @@
 ?>
 </table>
 
-<!--<a href="#">GRADE 1</a>
-<a href="#">GRADE 1</a>
-<a href="#">GRADE 1</a>
-<a href="#">GRADE 1</a>
-<a href="#">GRADE 1</a>
-<a href="#">GRADE 1</a>
-<a href="#">GRADE 1</a>-->
-<data></data>
+<div class="text-center">
+  <form method="post" class="form" action="<?php echo URL; ?>grades/add">
+    <button type="submit" class="btn btn-primary">Add Grade</button>
+  </form>
+</div>
+
+
+
+
+
+

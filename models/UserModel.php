@@ -21,7 +21,7 @@ class UserModel extends Model {
             $roleData = $roleModel->readRole($userData["role_id_fk"]);
             $userData["role_name"] = str_replace("_", " ", $roleData["name"]);
         }
-
+        
         return $userData;
     }
 
@@ -65,6 +65,7 @@ class UserModel extends Model {
             ":password" => $data["password"], ":email" => $data["email"],
             ":contactNumber" => $data["contactNumber"]));
     }
+    
 
     function updateUser($data) {
         $statment = $this->db->prepare("UPDATE users SET role_id_fk = :roleId,
@@ -75,8 +76,7 @@ class UserModel extends Model {
         ":email" => $data["email"], ":contactNumber" => $data["contactNumber"],
         ":userId" => $data["userId"]));
 
-        //print_r($data);
-        //die;
+                //die;
     }
 
     function deleteUser($id) {

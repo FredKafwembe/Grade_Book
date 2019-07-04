@@ -1,6 +1,9 @@
 <h1>User: Edit</h1>
+<<?php 
+print_r($this->user['user_id']);
 
-<form method="post" action="<?php echo URL; ?>user/updateUser/<?php echo $this->user['user_id']; ?>">
+ ?>
+<form method="post" action="<?php echo URL; ?>user/updateUser/<?php echo $this->user['user_id']; ?>"> 
     <label>First Name</label><input type="text" name="firstName" value="<?php echo $this->user['first_name']; ?>"/><br/>
     <label>Last Name</label><input type="text" name="lastName" value="<?php echo $this->user['last_name']; ?>"/><br/>
     <label>Password</label><input type="text" name="password"/><br/>
