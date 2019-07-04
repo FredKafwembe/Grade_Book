@@ -1,6 +1,6 @@
 <h1>Grades</h1>
 
-
+<div class="card">
 <table>
   <tr>
 
@@ -23,6 +23,8 @@
   }
 ?>
 </table>
+</div>
+<br>
 
 <div class="text-center">
   <form method="post" class="form" action="<?php echo URL; ?>grades/add">
