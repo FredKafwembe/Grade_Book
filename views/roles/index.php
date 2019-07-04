@@ -13,7 +13,7 @@
     </div>
   <?php }
 } ?>
-
+<div class="card">
 <table class="table">
   <tr> <th>Role</th> <th>Permissions</th> <th></th></tr>
 
@@ -65,3 +65,5 @@
     </form>
   </div>
 <?php } ?>
+<br>
+</div>

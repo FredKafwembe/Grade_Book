@@ -1,1 +1,3 @@
-This is the main page welcome.
+<div class="text-center">
+    <img src="<?php echo URL ?>/public/images/home.jpg">
+</div>

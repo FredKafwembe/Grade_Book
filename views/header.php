@@ -16,7 +16,7 @@
     <title>Grade Book</title>
   </head>
 
-  <body>
+  <body style="background-color:orange;padding:100px;">
     <?php Session::init(); ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header">

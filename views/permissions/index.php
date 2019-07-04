@@ -7,6 +7,7 @@
   </div>
 
   <div class="col-sm-8">
+  <div class="card">
     <table class="table table-striped">
       <?php
       foreach($this->permissionList as $key => $value) {
@@ -14,7 +15,9 @@
       }
       ?>
     <table>
+    </div>
   </div>
+  
 
   <div class="col-sm-2">
   </div>
