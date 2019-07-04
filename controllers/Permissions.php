@@ -2,6 +2,14 @@
 class Permissions extends Controller {
   function __construct() {
     parent::__construct();
+
+    Session::init();
+    $logged = Session::get("loggedIn");
+    if(!$logged) {
+      Session::destroy();
+      header("location: login");
+      exit;
+    }
   }
 
   function index() {

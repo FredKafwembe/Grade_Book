@@ -58,7 +58,7 @@
                                                                             <div class="col text-right">
                                                                                 <input readonly id="<?php echo TEST_TYPE["mid"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
                                                                                     class="form-control-plaintext text-right" 
-                                                                                    style="display: inline; width: 5em"
+                                                                                    style="display: inline; width: 4em"
                                                                                     type="number" 
                                                                                     value= <?php 
                                                                                     $resultFound = false;
@@ -73,27 +73,19 @@
                                                                                         echo 0;
                                                                                     ?>
                                                                                     name="<?php echo $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
+                                                                                    step="0.01"
                                                                                     min="0" 
                                                                                     max="100">
-                                                                                
-                                                                                <?Php $permissions = Session::get("permissions");
-                                                                                if(isset($permissions["Edit_Results"])) { ?>
-                                                                                    <button onClick="editMark(<?php echo "'" . TEST_TYPE["mid"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'"; ?>)" 
-                                                                                        class="btn btn-primary btn-sm" type="button">Edit</button>
-                                                                                <?php } ?>
+                                                                                <button onClick="editMark(<?php echo "'" . TEST_TYPE["mid"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'"; ?>)" class="btn btn-primary btn-sm" type="button">Edit</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             <?php } ?>
                                                             <input type="hidden" name="testType" value="<?php echo TEST_TYPE["mid"] ?>">
-
-                                                            <?Php $permissions = Session::get("permissions");
-                                                            if(isset($permissions["Edit_Results"])) { ?>
-                                                                <div class="text-center">
-                                                                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                                                                </div>
-                                                            <?php } ?>
+                                                            <div class="text-center">
+                                                                <button type="submit" class="btn btn-primary form-control">Update</button>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -128,7 +120,7 @@
                                                                             <div class="col text-right">
                                                                                 <input readonly id="<?php echo TEST_TYPE["end"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
                                                                                     class="form-control-plaintext text-right" 
-                                                                                    style="display: inline; width: 5em" 
+                                                                                    style="display: inline; width: 4em" 
                                                                                     type="number" 
                                                                                     value= <?php 
                                                                                     $resultFound = false;
@@ -145,24 +137,16 @@
                                                                                     name="<?php echo $pupilInfo["user_id"] . $subjectInfo["subject_id"]; ?>" 
                                                                                     min="0" 
                                                                                     max="100">
-
-                                                                                <?Php $permissions = Session::get("permissions");
-                                                                                if(isset($permissions["Edit_Results"])) { ?>
-                                                                                    <button onClick="editMark(<?php echo "'" . TEST_TYPE["end"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'" ?>)" class="btn btn-primary btn-sm" type="button">Edit</button>
-                                                                                <?php } ?>
+                                                                                <button onClick="editMark(<?php echo "'" . TEST_TYPE["end"] . $pupilInfo["user_id"] . $subjectInfo["subject_id"] . "'" ?>)" class="btn btn-primary btn-sm" type="button">Edit</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             <?php } ?>
                                                             <input type="hidden" name="testType" value="<?php echo TEST_TYPE["end"] ?>">
-                                                            
-                                                            <?Php $permissions = Session::get("permissions");
-                                                            if(isset($permissions["Edit_Results"])) { ?>
-                                                                <div class="text-center">
-                                                                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                                                                </div>
-                                                            <?php } ?>
+                                                            <div class="text-center">
+                                                                <button type="submit" class="btn btn-primary form-control">Update</button>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -175,24 +159,6 @@
                         }
                     }
                     ?>
-                    <tr>
-                        <td class="text-center" colspan="4">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <form style="display: inline" method="post" action="<?php echo URL . "results/createPDF/" . $this->gradesInfo[$i]["grade_id"]; ?>">
-                                            <button type="submit" class="btn btn-primary">Create PDF</button>
-                                        </form>
-                                    </div>
-                                    <div class="col">
-                                        <form style="display: inline" method="post" action="<?php echo URL . "results/exportToExcel/" . $this->gradesInfo[$i]["grade_id"]; ?>">
-                                            <button type="submit" class="btn btn-primary">Create Excel Document</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>

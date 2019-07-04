@@ -8,11 +8,11 @@ class LoginModel extends Model {
     //echo "Login in model.";
   }
 
-  public function run() {
+  public function run($loginInfo) {
     $statement = $this->db->prepare(
       "SELECT role_id_fk, password, email, first_name, last_name, contact_number 
       FROM users WHERE user_id = :userId AND password = MD5(:password)");
-    $statement->execute(array(":userId" => $_POST['userId'], ":password" => $_POST['password']));
+    $statement->execute(array(":userId" => $loginInfo['userId'], ":password" => $loginInfo['password']));
 
     $data = $statement->fetch();
     //print_r($data);
@@ -34,6 +34,10 @@ class LoginModel extends Model {
       Session::init();
       Session::set("loggedIn", true);
       Session::set("permissions", $rolePermissions);
+      Session::set("firstName", $data["first_name"]);
+      Session::set("lastName", $data["last_name"]);
+      Session::set("userId", $loginInfo["userId"]);
+      Session::set("Email", $data["email"]);
       header("location: " . URL . "dashboard");
     } else {
       //Error

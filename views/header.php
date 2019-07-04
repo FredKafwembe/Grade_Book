@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="<?php echo URL; ?>public/css/bootstrap.min.css">
     <script type="text/javascript" src="<?php echo URL; ?>public/js/jquery-3.4.1.js"></script>
-    <!--<link rel="stylesheet" href="<?php //echo URL; ?>public/css/default.css" />-->
+    <script src="<?php echo URL; ?>public/js/bootstrap-validate.js"></script>
     <?php if(isset($this->js)) {
       foreach ($this->js as $js) {
         echo "<script type='text/javascript' src='" . URL . "views/" . $js . "'></script>";
@@ -82,6 +82,13 @@
             </li>
           <?php }?>
         </ul>
+
+        <?php if(Session::get("loggedIn")) { ?>
+          <ul class="nav navbar-nav navbar-right">
+            <li>Welcome <?php echo Session::get("firstName") . " " . 
+              Session::get("lastName") . "<br/> User ID: " . Session::get("userId"); ?></li>
+          </ul>
+        <?php } ?>
       </div>
     </nav>
 

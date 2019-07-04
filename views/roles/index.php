@@ -42,15 +42,26 @@
       </td>
 
       <td>
-        <a href="<?php echo URL; ?>roles/edit/<?php echo $key ?>">Edit</a>
-        <a href="<?php echo URL; ?>roles/delete/<?php echo $key; ?>">Delete</a>
+        <?php
+          $permissions = Session::get("permissions");
+          if(isset($permissions["Edit_Roles"])) {
+            echo "<a href=" . URL . "roles/edit/$key>Edit</a> ";
+          }
+
+          if(isset($permissions["Delete_Roles"])) {
+            echo "<a href=" . URL . "roles/delete/$key>Delete</a>";
+          }
+        ?>
+
       </td>
     </tr>
   <?php } ?>
 </table>
 
-<div class="text-center">
-  <form method="post" class="form" action="<?php echo URL; ?>roles/add">
-    <button type="submit" class="btn btn-primary">Add Role</button>
-  </form>
-</div>
+<?php if(isset($permissions["Create_Roles"])) { ?>
+  <div class="text-center">
+    <form method="post" class="form" action="<?php echo URL; ?>roles/add">
+      <button type="submit" class="btn btn-primary">Add Role</button>
+    </form>
+  </div>
+<?php } ?>

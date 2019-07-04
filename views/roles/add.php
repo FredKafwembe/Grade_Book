@@ -1,7 +1,21 @@
+<!--<div class="bs-callout bs-callout-warning hidden">
+    <h4>Oh snap!</h4>
+    <p>This form seems to be invalid :(</p>
+</div>
+
+<div class="bs-callout bs-callout-info hidden">
+    <h4>Yay!</h4>
+    <p>Everything seems to be ok :)</p>
+</div>
+
+<div class="alert alert-danger hidden" role="alert">
+    <h4>Oh snap!</h4>
+    <p>This form seems to be invalid :(</p>
+</div>-->
+
 <div class="text-center">
     <h1>Add Role</h1>
 </div>
-
 
 <div class="row">
 
@@ -9,10 +23,16 @@
     </div>
 
     <div class="col-sm-8">
-        <form class="form" method="post" action="<?php echo URL; ?>roles/create">
+        <form class="form needs-validation" method="post" action="<?php echo URL; ?>roles/create" novalidate>
             <div class="form-group">
                 <label for="roleName">Role Name</label>
-                <input class="form-control" type="text" name="roleName" id="roleName" placeholder="Enter role name"/>
+                <input class="form-control" type="text" name="roleName" id="roleName" placeholder="Enter role name" required/>
+                <div class="valid-feedback">
+                    Role name OK.
+                </div>
+                <div class="invalid-feedback">
+                    Please specify a role name.
+                </div>
             </div>
             <table class="table table-borderless">
                 <tr>

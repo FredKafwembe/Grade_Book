@@ -8,12 +8,13 @@
     </div>
 
     <div class="col-sm-8">
-        <form class="form" method="post" action="<?php echo URL; ?>roles/updateRole/<?php echo $this->roleId; ?>">
+        <form class="form" method="post" 
+            action="<?php echo URL; ?>roles/updateRole/<?php echo $this->roleId; ?>">
             <div class="form-group">
                 <label for="roleName">Role Name</label>
                 <input class="form-control" type="text" name="roleName" 
-                    value="<?php echo str_replace("_", " ", $this->rolePermissions[$this->roleId]["roleName"]); ?>" 
-                    id="roleName" placeholder="Enter role name"/>
+                    value="<?php echo str_replace("_", " ", $this->rolePermissions[$this->roleId]["roleName"]); ?>"
+                    id="roleName" placeholder="Enter role name" required/>
             </div>
             <table class="table table-borderless">
                 <tr>
