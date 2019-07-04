@@ -1,5 +1,5 @@
 <h1>Subjects</h1>
-
+<div class="card">
 <table>
   <tr>
 
@@ -29,6 +29,8 @@
 ?>
 
 </table>
+</div>
+<br>
 <?php 
 
 /*
@@ -45,4 +47,4 @@
 
 
 
-Subjects offered to pupils appear here.
+
