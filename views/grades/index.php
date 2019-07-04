@@ -1,4 +1,6 @@
-<h1>Grades</h1>
+<div class="text-center">
+  <h1>Grades</h1>
+</div>
 
 <div class="card">
 <table>

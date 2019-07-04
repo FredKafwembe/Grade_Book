@@ -90,6 +90,14 @@ class Grades extends Controller {
         $this->view->grade_id = $_POST["grade_id"];
       $this->view->render("grades/addStud");
     }
+    function filterTea(){
+      $data; 
+      $this->view->roleList = $this->model->readAllRoles();
+      $data = $_POST['roleId'];
+      $this->view->userList = $this->model->readSpec($data);
+      $this->view->grade_id = $_POST["grade_id"];
+    $this->view->render("grades/addTea");
+  }
       function addTea($id){
         $this->view->userList = $this->model->readAllStuds();
       $this->view->roleList = $this->model->readAllRoles();
@@ -121,8 +129,7 @@ class Grades extends Controller {
     }
     
 
-	function edit($id) {
-      
+	function edit($id) {   
       
       
       $this->view->gradeList = $this->model->readAllGrades();

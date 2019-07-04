@@ -1,4 +1,5 @@
 <h1>Grade Page</h1>
+<div class="card">
 <?php
 
 
@@ -51,7 +52,7 @@
 </table>
 <br>
 <?php 
-echo "GRADE TEACHER = " ;
+echo "GRADE TEACHER : " ;
   foreach ($this->teacher as $key => $value) {
   
   echo $value['first_name'] . " " . $value['last_name'];
@@ -85,3 +86,4 @@ echo "GRADE TEACHER = " ;
 */
  ?>
  <br>
+ </div>

@@ -1,4 +1,6 @@
+<div class="text-center">
 <h1>Users</h1>
+</div>
 
 <div class="card">
   <table class="table">

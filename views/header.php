@@ -31,11 +31,11 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <?php if(!Session::get("loggedIn")) { ?>
+          <!--<?php if(!Session::get("loggedIn")) { ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo URL; ?>help">Help <span class="sr-only">(current)</span></a>
             </li>
-          <?php }?>
+          <?php }?>-->
 
           <?php if(Session::get("loggedIn")) { ?>
             <?php $permissions = Session::get("permissions"); ?>

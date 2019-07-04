@@ -1,26 +1,21 @@
 <h3>ADD</h3>
 
-
-<form method="post" class="form" action="<?php echo URL; ?>grades/filter">
-<div class="col">
-          <div class="form-group">
-            <label><h6>Select Role</h6></label>
-            <select name="roleId" class="form-control">
-              <?php foreach($this->roleList as $role) {
-                printf("<option value='%s'>%s</option>", $role["role_id"], str_replace("_", " ", $role["name"]));
-              } ?>
-            </select>
-          </div>
-        </div>
-
-      </div>
-     <input type="hidden" id="custId" name="grade_id" value="<?php echo $this->grade_id ?>">
-      <div class="col text-center">
-        <button type="submit" class="btn btn-primary">Search</button> 
-        <!--<input type="submit" class="btn btn-default" />-->
-      </div>
-    </form>
+<div class="card">
+<form method="post" class="form" action="<?php echo URL; ?>grades/filterTea">
+  <label><h6>Select Role</h6></label>
+  <select name="roleId" class="form-control">
+    <?php foreach($this->roleList as $role) {
+      printf("<option value='%s'>%s</option>", $role["role_id"], str_replace("_", " ", $role["name"]));
+    } ?>
+  </select>
+    
+  <input type="hidden" id="custId" name="grade_id" value="<?php echo $this->grade_id ?>">
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </div>
+</form>
 <?php // echo $this->grade_id;  ?>
+
 <table class="table">
   <tr>
     <th>First Name</th>
@@ -55,4 +50,5 @@
   }
 ?>
 </table>
+</div>
 

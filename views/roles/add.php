@@ -1,18 +1,3 @@
-<!--<div class="bs-callout bs-callout-warning hidden">
-    <h4>Oh snap!</h4>
-    <p>This form seems to be invalid :(</p>
-</div>
-
-<div class="bs-callout bs-callout-info hidden">
-    <h4>Yay!</h4>
-    <p>Everything seems to be ok :)</p>
-</div>
-
-<div class="alert alert-danger hidden" role="alert">
-    <h4>Oh snap!</h4>
-    <p>This form seems to be invalid :(</p>
-</div>-->
-
 <div class="text-center">
     <h1>Add Role</h1>
 </div>
@@ -22,7 +7,7 @@
     <div class="col-sm-2">
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-8 card">
         <form class="form needs-validation" method="post" action="<?php echo URL; ?>roles/create" novalidate>
             <div class="form-group">
                 <label for="roleName">Role Name</label>

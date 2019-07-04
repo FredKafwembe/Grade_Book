@@ -1,4 +1,6 @@
-<h1>Subjects</h1>
+<div class="text-center">
+  <h1>Subjects</h1>
+  </div>
 <div class="card">
 <table>
   <tr>
